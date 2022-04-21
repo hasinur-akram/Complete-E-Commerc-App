@@ -2,14 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecommerce/const/AppColors.dart';
+import 'package:ecommerce/ui/product_details_screen.dart';
 import 'package:ecommerce/ui/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
   @override
   State<Home> createState() => _HomeState();
 }
@@ -20,7 +19,6 @@ class _HomeState extends State<Home> {
   var _dotPosition = 0;
   List _products = [];
   var _firestoreInstance = FirebaseFirestore.instance;
-
 
   fetchCarouselImages()async{
 
@@ -97,7 +95,8 @@ class _HomeState extends State<Home> {
                     onTap: ()=>Navigator.push(context, CupertinoPageRoute(builder: (_)=>SearchScreen())),
                   ),
                 ),
-                SizedBox(height: 10.h,),
+                SizedBox(
+                  height: 10.h,),
                 AspectRatio(aspectRatio: 3.5,
                   child: CarouselSlider(items: _carouselImages.map((item) => Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -118,10 +117,11 @@ class _HomeState extends State<Home> {
                     }
                   )),
                 ),
-                SizedBox(height: 10.h,),
+                SizedBox(
+                  height: 10.h,),
 
                 DotsIndicator(
-                  dotsCount: _carouselImages.length==0?1:_carouselImages.length,
+                  dotsCount: _carouselImages.length==0?10:_carouselImages.length,
                   position: _dotPosition.toDouble(),
                   decorator: DotsDecorator(
                     activeColor: AppColors.deep_orange,
@@ -136,29 +136,37 @@ class _HomeState extends State<Home> {
                   child: GridView.builder(
                       scrollDirection: Axis.vertical,
                       itemCount: _products.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1,childAspectRatio: 1),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1,childAspectRatio: 1),
                       itemBuilder: (_,index){
-                    return Card(
-                      elevation: 3,
-                      child: SingleChildScrollView(
+                    return GestureDetector(
+                      onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>ProductDetails(_products[index]))),
+                      child: Card(
+                        elevation: 3,
                         child: Column(
                           children: [
-                            AspectRatio(aspectRatio: 2,child: Container(child: Image.network(_products[index]['product-img'][0]))),
+                            AspectRatio(
+                                aspectRatio: 2,
+                                child: Container(
+                                    child: Image.network(
+                                        _products[index]['product-img'][0],
+                                    ))),
                             SizedBox(height: 15.h,),
                             Text("${_products[index]["product-name"]}"),
                             SizedBox(height: 10.h,),
-                            Text("${_products[index]["product-price"].toString()}"),
+                            Text(
+                                "${_products[index]["product-price"].toString()}"),
                           ],
                         ),
                       ),
                     );
                   }),
-                )
+                ),
               ],
             ),
           ),
         ),
-      
+
     );
   }
 }
