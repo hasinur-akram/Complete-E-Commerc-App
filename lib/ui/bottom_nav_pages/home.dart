@@ -2,8 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecommerce/const/AppColors.dart';
+import 'package:ecommerce/ui/search_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Home extends StatefulWidget {
@@ -20,7 +21,6 @@ class _HomeState extends State<Home> {
   List _products = [];
   var _firestoreInstance = FirebaseFirestore.instance;
 
-  TextEditingController _searchController = TextEditingController();
 
   fetchCarouselImages()async{
 
@@ -36,6 +36,7 @@ class _HomeState extends State<Home> {
       }
     });
   }
+
   fetchProducts()async{
 
     QuerySnapshot qn =
@@ -58,8 +59,6 @@ class _HomeState extends State<Home> {
   }
 
 
-
-
   @override
   void initState() {
     fetchCarouselImages();
@@ -76,43 +75,26 @@ class _HomeState extends State<Home> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 20.w,right: 20.w),
-                  child: Row(
-                    children: [
-                      Expanded(child: SizedBox(
-                        height: 60.h,
-                        child: TextFormField(
-                          controller: _searchController,
-                          decoration: InputDecoration(
-                            fillColor: Colors.grey,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(0)),
-                              borderSide: BorderSide(
-                                color: Colors.blue,
-                              )
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(0)),
-                                borderSide: BorderSide(
-                                  color: Colors.cyan,
-                                )
-                            ),
-                            hintText: 'Search your App Here',
-                            hintStyle: TextStyle(fontSize: 15.sp),
-                          ),
-                        ),
-                      ),),
-                      GestureDetector(
-                        child: Container(
-                          height: 60.h,
-                          width: 60.h,
-                          color: AppColors.deep_orange,
-                          child: Center(
-                            child: Icon(Icons.search,color: Colors.white,),
-                          ),
-                        ),
-                        onTap: (){},
-                      )
-                    ],
+                  child: TextFormField(
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(0)),
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                        )
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(0)),
+                          borderSide: BorderSide(
+                            color: Colors.cyan,
+                          )
+                      ),
+                      hintText: 'Search your App Here',
+                      hintStyle: TextStyle(fontSize: 15.sp),
+                    ),
+                    onTap: ()=>Navigator.push(context, CupertinoPageRoute(builder: (_)=>SearchScreen())),
                   ),
                 ),
                 SizedBox(height: 10.h,),
