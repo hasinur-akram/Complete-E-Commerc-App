@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     Text(
-                      "Sign In",
+                      "Welcome Login Page",
                       style: TextStyle(fontSize: 22.sp, color: Colors.white),
                     ),
                   ],

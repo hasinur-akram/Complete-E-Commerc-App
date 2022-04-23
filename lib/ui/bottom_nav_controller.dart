@@ -2,6 +2,7 @@ import 'package:ecommerce/ui/bottom_nav_pages/cart.dart';
 import 'package:ecommerce/ui/bottom_nav_pages/favourite.dart';
 import 'package:ecommerce/ui/bottom_nav_pages/home.dart';
 import 'package:ecommerce/ui/bottom_nav_pages/profile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
@@ -15,8 +16,8 @@ class BottomNavController extends StatefulWidget {
 class _BottomNavControllerState extends State<BottomNavController> {
   final _pages = [
     Home(),
-    Favourite(),
     Cart(),
+    Favourite(),
     Profile(),
   ];
   var _currentIndex = 0;
@@ -32,7 +33,7 @@ class _BottomNavControllerState extends State<BottomNavController> {
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 5,
@@ -42,7 +43,9 @@ class _BottomNavControllerState extends State<BottomNavController> {
         currentIndex: _currentIndex,
         selectedLabelStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
         items: [
+
         BottomNavigationBarItem(
+
             icon: Icon(Icons.home),
             label: 'Home',
         ),
@@ -50,17 +53,23 @@ class _BottomNavControllerState extends State<BottomNavController> {
             icon: Icon(Icons.add_shopping_cart),
             label: 'Cart',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Person',
-          ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite_outline),
             label: 'Favorite',
           ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Person',
+          ),
+
       ],),
       body: _pages[_currentIndex],
     );
   }
 }
+
+//Navigator.push(context, CupertinoPageRoute(builder: (_)=>Profile())));
+//child: IconButton(onPressed: ()=>Navigator.pop(context), icon: Icon(Icons.arrow_back,color: Colors.white,),),
 

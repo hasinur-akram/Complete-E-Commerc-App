@@ -29,7 +29,8 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("E-Commerce",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 44.sp),),
+              Image.asset("assets/mypic.png"),
+              Text("Choose your App",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 44.sp),),
               SizedBox(height: 20.h,),
               CircularProgressIndicator(color: Colors.white,),
             ],

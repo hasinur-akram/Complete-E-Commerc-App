@@ -1,3 +1,5 @@
+import 'package:ecommerce/ui/bottom_nav_pages/cart.dart';
+import 'package:ecommerce/ui/bottom_nav_pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/ui/splash_screen.dart';
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
 
             primarySwatch: Colors.blue,
           ),
-          home: SplashScreen(),
+          home: Home(),
         );
       },
     );
